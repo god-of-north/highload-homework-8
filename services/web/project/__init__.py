@@ -18,7 +18,8 @@ def index():
 def generate(count:int):
     with mysql.connector.connect(host="db", user="root", password="root", database="db") as db:
         gen = Generator()
-        for _ in range(count):
+        n = 1
+        for i in range(count):
             user = gen.generate_user()
 
             sql = "INSERT INTO users (birth_day,registration_date,user_login,user_email,firstname,surname,patronymic,sex,job_position,description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -26,7 +27,11 @@ def generate(count:int):
 
             cursor = db.cursor()
             cursor.execute(sql, val)
-            db.commit()
+
+            if(int(i/1000) == n):
+                n = n+1
+                db.commit()
+        db.commit()
 
 @app.route("/add/<count>")
 def add_user(count):
