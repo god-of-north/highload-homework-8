@@ -43,4 +43,23 @@ def add_user(count):
         generate(1)
     return "OK"
 
+g_db = None
+
+@app.route("/test")
+def test():
+    global g_db
+    if g_db == None or not g_db.is_connected():
+        g_db = mysql.connector.connect(host="db", user="root", password="root", database="db")
+
+    gen = Generator()
+    user = gen.generate_user()
+
+    sql = "INSERT INTO users (birth_day,registration_date,user_login,user_email,firstname,surname,patronymic,sex,job_position,description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (user["birth"], user["reg"], user["login"], user["mail"], user["name"], user["surname"], user["patronymic"], user["sex"], user["job"], user["descr"])
+
+    cursor = g_db.cursor()
+    cursor.execute(sql, val)
+    g_db.commit()
+
+    return "OK"
 

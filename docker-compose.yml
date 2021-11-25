@@ -23,7 +23,7 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'qwerty'
       MYSQL_ROOT_PASSWORD: 'root'
-    command: --innodb-flush-log-at-trx-commit=2
+    command: --innodb-flush-log-at-trx-commit=0
     ports:
       - 3306:3306
     expose:

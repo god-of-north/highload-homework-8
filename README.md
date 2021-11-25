@@ -18,42 +18,42 @@ curl -X GET http://localhost:5000/add/40000000
 Testing innodb_flush_log_at_trx_commit parameter (concurrency=10):
 
 ```
-siege -c10 -t10s -q http://localhost:5000/add/1
+siege -c10 -t10s -q http://localhost:5000/test
 
 innodb_flush_log_at_trx_commit     0                 1                 2
-Transactions:                    758 hits          764 hits          767 hits
-Availability:                 100.00 %          100.00 %          100.00 %
-Elapsed time:                  59.49 secs        59.08 secs        59.08 secs
-Data transferred:               0.00 MB           0.00 MB           0.00 MB
-Response time:                  0.27 secs         0.26 secs         0.24 secs
-Transaction rate:              12.74 trans/sec   12.93 trans/sec   12.98 trans/sec
+Transactions:                    614 hits          202 hits          475 hits
+Availability:                 100.00 %           20.95 %           54.98 %
+Elapsed time:                  59.82 secs        63.48 secs        59.73 secs
+Data transferred:               0.00 MB           0.21 MB           0.11 MB
+Response time:                  0.49 secs         0.71 secs         0.34 secs
+Transaction rate:              10.26 trans/sec    3.18 trans/sec    7.95 trans/sec
 Throughput:                     0.00 MB/sec       0.00 MB/sec       0.00 MB/sec
-Concurrency:                    3.45              3.34              3.12
-Successful transactions:         758               764               767
-Failed transactions:               0                 0                 0
-Longest transaction:            1.94              1.13              1.95
-Shortest transaction:           0.04              0.08              0.04
+Concurrency:                    4.99              2.27              2.74
+Successful transactions:         614               202               475
+Failed transactions:               0               762               389
+Longest transaction:            1.90              1.45              1.63
+Shortest transaction:           0.04              0.00              0.00
 ```
 
 
 Testing innodb_flush_log_at_trx_commit parameter (concurrency=50):
 
 ```
-siege -c50 -t10s -q http://localhost:5000/add/1
+siege -c50 -t10s -q http://localhost:5000/test
 
 innodb_flush_log_at_trx_commit     0                 1                 2
-Transactions:                    943 hits          832 hits         1048 hits
+Transactions:                    713 hits          508 hits          631 hits
 Availability:                 100.00 %          100.00 %          100.00 %
-Elapsed time:                  59.85 secs        59.54 secs        59.17 secs
+Elapsed time:                  59.11 secs        60.01 secs        59.71 secs
 Data transferred:               0.00 MB           0.00 MB           0.00 MB
-Response time:                  2.44 secs         2.81 secs         2.24 secs
-Transaction rate:              15.76 trans/sec   13.97 trans/sec   17.71 trans/sec
+Response time:                  3.52 secs         5.12 secs         4.04 secs
+Transaction rate:              12.06 trans/sec    8.47 trans/sec   10.57 trans/sec
 Throughput:                     0.00 MB/sec       0.00 MB/sec       0.00 MB/sec
-Concurrency:                   38.38             39.33             39.72
-Successful transactions:         943               832              1048
+Concurrency:                   42.42             43.33             42.74
+Successful transactions:         713               508               631
 Failed transactions:               0                 0                 0
-Longest transaction:            7.83              5.97              7.32
-Shortest transaction:           0.07              0.88              0.06
+Longest transaction:            5.28              7.88              6.88
+Shortest transaction:           0.52              0.64              0.15
 ```
 
 
